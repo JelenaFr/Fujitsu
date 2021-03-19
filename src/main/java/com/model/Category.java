@@ -1,12 +1,11 @@
 package com.model;
 
+import com.repo.CategoryRepo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
 
 
@@ -15,43 +14,17 @@ import java.util.Collection;
 @Data
 @Entity
 @Table
-public class Category implements Serializable {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private byte level;
+    private int level;
 
     @ManyToOne
     private Category parent;
 
-
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parent")
     private Collection<Category> children;
-
-    public Category( String name, byte level) {
-        super();
-        this.name = name;
-        this.level = level;
-    }
-
-    public  Category fillData(String name, byte level, Category parent ) {
-        Category category = new Category();
-        category.setName(name);
-        category.setLevel(level);
-        category.setParent(parent);
-        return category;
-
-    }
-
-
-//    void ccc() {
-//        var feedback = Feedback.builder()
-//                .email("asdasd@asdasd")
-//                .name("asdasd")
-//                .text("asdasd")
-//                .build();
-//    }
-
 
 }

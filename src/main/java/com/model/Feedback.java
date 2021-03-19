@@ -16,24 +16,19 @@ import java.util.List;
 @Table
 @Builder
 @AllArgsConstructor
-public class Feedback implements Serializable {
+public class Feedback  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
-
     private String name;
-
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     List<Category> categories = new ArrayList<>();
 
     private String text;
-
-
-
 }
 
 
