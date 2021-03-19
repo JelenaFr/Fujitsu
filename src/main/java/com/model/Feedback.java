@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
 @Table
 @Builder
 @AllArgsConstructor
-public class Feedback {
+public class Feedback implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +27,7 @@ public class Feedback {
 
     private String email;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<Category> categories = new ArrayList<>();
 
     private String text;

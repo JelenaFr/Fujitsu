@@ -31,6 +31,7 @@ public class FeedbackApplication extends SpringBootServletInitializer {
         return application.sources(FeedbackApplication.class);
     }
 
+
     @Bean
     CommandLineRunner runner(FeedbackRepo repositoryFeed, CategoryRepo repositoryCateg) {
         return args -> {
@@ -46,63 +47,80 @@ public class FeedbackApplication extends SpringBootServletInitializer {
             Category category9 = new Category();
             Category category10 = new Category();
 
-            category1.setId(1L);
-            category1.setName("Application");
-            category1.setLevel((byte) 1);
-            category1.setParent(null);
+
+            repositoryCateg.save(category1.fillData("Application", (byte) 1, null));
+            repositoryCateg.save(category2.fillData("Health", (byte) 2, category1));
+            repositoryCateg.save(category3.fillData("Patients portal", (byte) 3, category2));
+            repositoryCateg.save(category4.fillData("Doctors portal", (byte) 3, category2));
+            repositoryCateg.save(category5.fillData("Remote visits portal", (byte) 3, category2));
+            repositoryCateg.save(category6.fillData("Registration", (byte) 4, category5));
+            repositoryCateg.save(category7.fillData("Virtual visit", (byte) 4, category5));
+            repositoryCateg.save(category8.fillData("Document management", (byte) 2, category1));
+            repositoryCateg.save(category9.fillData("OpenKM", (byte) 3, category8));
+            repositoryCateg.save(category10.fillData("Microsoft SharePoint", (byte) 3, category8));
+
+//            category1.setId(1L);
+//            category1.setName("Application");
+//            category1.setLevel((byte) 1);
+//            category1.setParent(null);
+//
+//
+//            category2.setId(2L);
+//            category2.setName("Health");
+//            category2.setLevel((byte) 2);
+//            category2.setParent(category1);
+//
+//
+//            category3.setId(3L);
+//            category3.setName("Patients portal");
+//            category3.setLevel((byte) 3);
+//            category3.setParent(category2);
 
 
-            category2.setId(2L);
-            category2.setName("Health");
-            category2.setLevel((byte) 2);
-            category2.setParent(category1);
+//            category4.setId(4L);
+//            category4.setName("Doctors portal");
+//            category4.setLevel((byte) 3);
+//            category4.setParent(category2);
+//
+//
+//            category5.setId(5L);
+//            category5.setName("Remote visits portal");
+//            category5.setLevel((byte) 3);
+//            category5.setParent(category2);
+//
+//
+//            category6.setId(6L);
+//            category6.setName("Registration");
+//            category6.setLevel((byte) 4);
+//            category6.setParent(category5);
+//
+//
+//            category7.setId(7L);
+//            category7.setName("Virtual visit");
+//            category7.setLevel((byte) 4);
+//            category7.setParent(category5);
+//
+//
+//            category8.setId(8L);
+//            category8.setName("Document management");
+//            category8.setLevel((byte) 2);
+//            category8.setParent(category1);
+//
+//            category9.setId(9L);
+//            category9.setName("OpenKM");
+//            category9.setLevel((byte) 3);
+//            category9.setParent(category8);
+//
+//            category10.setId(10L);
+//            category10.setName("Microsoft SharePoint");
+//            category10.setLevel((byte) 3);
+//            category10.setParent(category8);
 
 
-            category3.setId(3L);
-            category3.setName("Patients portal");
-            category3.setLevel((byte) 3);
-            category3.setParent(category2);
             categories.add(category3);
-
-            category4.setId(4L);
-            category4.setName("Doctors portal");
-            category4.setLevel((byte) 3);
-            category4.setParent(category2);
-
-
-            category5.setId(5L);
-            category5.setName("Remote visits portal");
-            category5.setLevel((byte) 3);
-            category5.setParent(category2);
-
-
-            category6.setId(6L);
-            category6.setName("Registration");
-            category6.setLevel((byte) 4);
-            category6.setParent(category5);
-
-
-            category7.setId(7L);
-            category7.setName("Virtual visit");
-            category7.setLevel((byte) 4);
-            category7.setParent(category5);
-
-
-            category8.setId(8L);
-            category8.setName("Document management");
-            category8.setLevel((byte) 2);
-            category8.setParent(category1);
-
-            category9.setId(9L);
-            category9.setName("OpenKM");
-            category9.setLevel((byte) 3);
-            category9.setParent(category8);
-
-            category10.setId(10L);
-            category10.setName("Microsoft SharePoint");
-            category10.setLevel((byte) 3);
-            category10.setParent(category8);
             categories.add(category10);
+
+
 
             repositoryCateg.save(category1);
             repositoryCateg.save(category2);
