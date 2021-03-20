@@ -21,6 +21,7 @@ public class Category {
     private String category_name;
     private int level;
 
+
     @ManyToOne
     private Category parent;
 

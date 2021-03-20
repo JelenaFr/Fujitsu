@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.model.Category;
+import com.model.Feedback;
 import com.repo.CategoryRepo;
 import com.repo.FeedbackRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class GeneralController {
@@ -17,43 +19,31 @@ public class GeneralController {
     @Autowired
     CategoryRepo categoryRepo;
 
-    @RequestMapping("/" )
-    public String indexPage(Model model, Category category) {
-        model.addAttribute("feedbacks", feedbackRepo.findAll() );
+    @RequestMapping("/")
+    public String indexPage(Model model) {
+        model.addAttribute("feedbacks", feedbackRepo.findAll());
         List<Category> l = categoryRepo.findAllFeedbackCategories();
-        //System.out.println(l.get(1));
-        model.addAttribute("categories", l );
+        model.addAttribute("categories", l);
+        model. addAttribute("categoriesSelector", categoryRepo.findAll());
         return "index";
     }
 
-//    @GetMapping("/")
-//    public String indexPage (@RequestParam("categoryName") String categoryName, Model model){
-//        model.addAttribute("feedbacks", feedbackRepo.findAll() );
-//        model.addAttribute("categories", categoryRepo.findAllFeedbackCategories(categoryName) );
-//        return "index";
-//        }
 
-    }
-
-
-//    @Autowired
-//    private MessageRepo messageRepo;
-//
-//    @GetMapping
-//    public String findAllFeedbacks (Map<String, Object> model) {
-//        Iterable<Message>messages = messageRepo.findAll();
-//        model.put("messages", messages);
+//    @GetMapping ("/")
+//    public  String categorySelector (Model model){
+//        model. addAttribute("categories", categoryRepo.findAll());
 //        return "index";
 //    }
-//
-//
+
+
 //    @PostMapping
-//    public String addFeedback (@RequestParam String name, @RequestParam String email, @RequestParam String text, Map<String, Object> model){
-//        Message message = new Message(name, email, text);
-//        messageRepo.save(message);
-//        Iterable<Message>messages = messageRepo.findAll();
+//    public String addFeedback(@RequestParam String name, @RequestParam String email, @RequestParam String text, Map<String, Object> model) {
+//        Iterable<Category> l = categoryRepo.findAll();
+//        Feedback feedback = new Feedback();
+//        feedbackRepo.save(feedback);
+//        Iterable<Feedback> messages = feedbackRepo.findAll();
 //        model.put("messages", messages);
 //        return "index";
 //    }
 
-
+}
