@@ -29,7 +29,7 @@ public class FeedbackApplication extends SpringBootServletInitializer {
 
     public Category createCategory(String name, int level, Category parent, CategoryRepo categoryRepo) {
         Category category = new Category();
-        category.setName(name);
+        category.setCategory_name(name);
         category.setLevel(level);
         category.setParent(parent);
         return categoryRepo.save(category);

@@ -31,12 +31,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each= "feedback : ${feedbacks}"  >
+        <tr th:each= "feedback : ${feedbacks}">
             <td th:text="${feedback.id}"></td>
             <td th:text="${feedback.name}"></td>
             <td th:text="${feedback.email}"></td>
             <td>
-                <p th:each="category : ${categories}" th:text= "${category}" ></p>
+                <span th:each="category : ${categories}" th:text="${category.getCategory_name()+' '}"  >
+
+                </span>
             </td>
 
             <td th:text="${feedback.text}"></td>

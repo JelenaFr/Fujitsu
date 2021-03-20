@@ -1,11 +1,14 @@
 package com.controller;
 
+import com.model.Category;
 import com.repo.CategoryRepo;
 import com.repo.FeedbackRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class GeneralController {
@@ -15,10 +18,21 @@ public class GeneralController {
     CategoryRepo categoryRepo;
 
     @RequestMapping("/" )
-    public String indexPage(Model model) {
+    public String indexPage(Model model, Category category) {
         model.addAttribute("feedbacks", feedbackRepo.findAll() );
-        model.addAttribute("categories", categoryRepo.findAllFeedbackCategories());
+        List<Category> l = categoryRepo.findAllFeedbackCategories();
+        //System.out.println(l.get(1));
+        model.addAttribute("categories", l );
         return "index";
+    }
+
+//    @GetMapping("/")
+//    public String indexPage (@RequestParam("categoryName") String categoryName, Model model){
+//        model.addAttribute("feedbacks", feedbackRepo.findAll() );
+//        model.addAttribute("categories", categoryRepo.findAllFeedbackCategories(categoryName) );
+//        return "index";
+//        }
+
     }
 
 
@@ -42,4 +56,4 @@ public class GeneralController {
 //        return "index";
 //    }
 
-}
+
