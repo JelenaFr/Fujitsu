@@ -31,12 +31,19 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Otto Lakk</td>
-            <td>test@fujitsu.ee</td>
-            <td>Patients portal, Microsoft SharePoint</td>
-            <td>Feedback text</td>
+        <tr th:each= "feedback : ${feedbacks}"  >
+            <td th:text="${feedback.id}"></td>
+            <td th:text="${feedback.name}"></td>
+            <td th:text="${feedback.email}"></td>
+            <td>
+                <p th:each="category : ${categories}" th:text= "${category}" ></p>
+            </td>
+
+            <td th:text="${feedback.text}"></td>
+<!--            <td th>Otto Lakk</td>-->
+<!--            <td>test@fujitsu.ee</td>-->
+<!--            <td>Patients portal, Microsoft SharePoint</td>-->
+<!--            <td>Feedback text</td>-->
         </tr>
         </tbody>
     </table>

@@ -1,15 +1,23 @@
 package com.controller;
 
+import com.repo.CategoryRepo;
+import com.repo.FeedbackRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class GeneralController {
+    @Autowired
+    private FeedbackRepo feedbackRepo;
+    @Autowired
+    CategoryRepo categoryRepo;
 
-
-    @RequestMapping("/")
-    public String indexPage() {
-
+    @RequestMapping("/" )
+    public String indexPage(Model model) {
+        model.addAttribute("feedbacks", feedbackRepo.findAll() );
+        model.addAttribute("categories", categoryRepo.findAllFeedbackCategories());
         return "index";
     }
 
