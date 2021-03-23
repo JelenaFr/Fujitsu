@@ -14,20 +14,37 @@ import java.util.Map;
 
 @Controller
 public class GeneralController {
-    @Autowired
-    private FeedbackRepo feedbackRepo;
-    @Autowired
-    CategoryRepo categoryRepo;
 
-    @RequestMapping("/")
-    public String indexPage(Model model) {
-        model.addAttribute("feedbacks", feedbackRepo.findAll());
-        List<Category> l = categoryRepo.findAllFeedbackCategories();
-        model.addAttribute("categories", l);
-        model. addAttribute("categoriesSelector", categoryRepo.findAll());
-        return "index";
-    }
 
+
+
+
+    ///////////////////////////////////////////////////////
+//    @Autowired
+//    private FeedbackRepo feedbackRepo;
+//    @Autowired
+//    CategoryRepo categoryRepo;
+//
+//    @RequestMapping("/")
+//    public String indexPage(Model model) {
+//        model.addAttribute("feedbacks", feedbackRepo.findAll());
+//        List<Category> l = categoryRepo.findAllFeedbackCategories();
+//        model.addAttribute("categories", l);
+//        model.addAttribute("categoriesSelector", categoryRepo.findAll());
+////        model.addAttribute("newfeedback", new Feedback());
+////        model.addAttribute("newcategory", new Category());
+//
+//        return "index";
+//    }
+
+//    @PostMapping
+//    public String createFeedback(@RequestBody Feedback feedback, @RequestBody Category category, Model model) {
+//        model.getAttribute("newcategory");
+//        model.getAttribute("newfeedback");
+//        categoryRepo.save(category);
+//        feedbackRepo.save(feedback);
+//        return "redirect:/";
+//    }
 
 //    @GetMapping ("/")
 //    public  String categorySelector (Model model){
@@ -36,7 +53,7 @@ public class GeneralController {
 //    }
 
 
-//    @PostMapping
+//    @GetMapping("/")
 //    public String addFeedback(@RequestParam String name, @RequestParam String email, @RequestParam String text, Map<String, Object> model) {
 //        Iterable<Category> l = categoryRepo.findAll();
 //        Feedback feedback = new Feedback();
