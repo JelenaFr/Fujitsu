@@ -51,7 +51,7 @@ public class FeedbackApplication extends SpringBootServletInitializer {
 
             List<Category> categories = Arrays.asList(patientsPortal, microsoftSharePoint);
 
-            feedbackRepo.save(new Feedback(1L, "test@fujitsu.ee", "Otto Lakk", categories, "some text"));
+            feedbackRepo.save(new Feedback(1L, "Otto Lakk","test@fujitsu.ee",  categories, "some text"));
 
         };
     }

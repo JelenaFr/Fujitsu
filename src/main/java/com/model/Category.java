@@ -27,4 +27,9 @@ public class Category {
     @OneToMany(mappedBy = "parent")
     private Collection<Category> children;
 
+    public boolean hasChildren() {
+        return children.isEmpty();
+    }
+
+
 }

@@ -1,9 +1,6 @@
 package com.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,6 +13,7 @@ import java.util.List;
 @Table
 @Builder
 @AllArgsConstructor
+@ToString
 public class Feedback  {
 
     @Id

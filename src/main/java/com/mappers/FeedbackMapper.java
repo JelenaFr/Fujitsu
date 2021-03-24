@@ -8,6 +8,7 @@ public class FeedbackMapper {
         return FeedbackDto.builder()
                 .id(feedback.getId())
                 .name(feedback.getName())
+                .email(feedback.getEmail())
                 .categories(feedback.getCategories())
                 .text(feedback.getText())
 
