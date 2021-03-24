@@ -1,8 +1,6 @@
 package com.mappers;
 
-import com.model.Category;
 import com.model.Feedback;
-import org.mapstruct.factory.Mappers;
 
 
 public class FeedbackMapper {
@@ -16,9 +14,6 @@ public class FeedbackMapper {
                 .build();
 
     }
-
-
-
 
 
 }

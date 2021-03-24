@@ -8,17 +8,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CategoryRepo extends CrudRepository<Category, Long> {
-    String q = "SELECT * \n" +
-            "    FROM category \n" +
-            "    LEFT JOIN  feedback_categories ON category.id = feedback_categories.categories_id\n" +
-            "    LEFT JOIN feedback ON feedback.id = feedback_categories.feedback_id\n" +
-            "    WHERE  feedback.id = feedback_categories.feedback_id\n" +
-            "\t\n" +
-            "\t ";
+public interface CategoryRepo extends CrudRepository<Category, Long>  {
+    //String q = "SELECT * FROM category LEFT JOIN  feedback_category ON category.id = feedback_category.categories_id LEFT JOIN feedback ON feedback.id = feedback_category.feedback_id WHERE  feedback.id = feedback_category.feedback_id;";
+    String g = "SELECT * FROM category LEFT JOIN  feedback_category ON category.id = feedback_category.categories_id LEFT JOIN feedback ON feedback.id = feedback_category.feedback_id WHERE  feedback.id = feedback_category.feedback_id;";
 
+    String querty = "SELECT * FROM category c WHERE c.parent_id is null order by c.name asc";
+    @Query(value = querty, nativeQuery = true)
+    List<Category> findParentCategories();
 
-    @Query(value = q, nativeQuery = true)
+    @Query(value = g, nativeQuery = true)
     List<Category> findAllFeedbackCategories();
 
 

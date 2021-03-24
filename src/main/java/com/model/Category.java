@@ -1,6 +1,5 @@
 package com.model;
 
-import com.repo.CategoryRepo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

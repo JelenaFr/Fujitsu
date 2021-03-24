@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.ManyToOne;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @Builder
@@ -16,7 +18,11 @@ public class CategoryDto {
     private Long id;
     private String name;
     private int level;
-    private Category parent;
+    private List<Category> children;
+
+    public boolean hasChildren() {
+        return children.isEmpty();
+    }
 
 
 }

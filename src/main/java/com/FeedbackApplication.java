@@ -29,17 +29,15 @@ public class FeedbackApplication extends SpringBootServletInitializer {
 
     public Category createCategory(String name, int level, Category parent, CategoryRepo categoryRepo) {
         Category category = new Category();
-        category.setName (name);
+        category.setName(name);
         category.setLevel(level);
         category.setParent(parent);
         return categoryRepo.save(category);
-
     }
 
     @Bean
     CommandLineRunner runner(FeedbackRepo feedbackRepo, CategoryRepo categoryRepo) {
         return args -> {
-
             Category application = createCategory("Application", 1, null, categoryRepo);
             Category health = createCategory("Health", 2, application, categoryRepo);
             Category patientsPortal = createCategory("Patients portal", 3, health, categoryRepo);

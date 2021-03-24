@@ -10,11 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
             crossorigin="anonymous"></script>
-
-
-<!--    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}" />-->
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"  />
-<!--    <link th:href ="@{/css/style.css}" rel="stylesheet"  />-->
 
 </head>
 <body class="text-center">
@@ -36,14 +32,16 @@
             <td th:text="${feedback.name}"></td>
             <td th:text="${feedback.email}"></td>
             <td>
-                <span th:each="category : ${categories}" th:text="${category.category_name} + ', '"  ></span>
+                <span th:each="category : ${usercategories}" th:text="${category.name+' '}"  >
 
+                </span>
             </td>
+
             <td th:text="${feedback.text}"></td>
-<!--            <td th>Otto Lakk</td>-->
-<!--            <td>test@fujitsu.ee</td>-->
-<!--            <td>Patients portal, Microsoft SharePoint</td>-->
-<!--            <td>Feedback text</td>-->
+            <!--            <td th>Otto Lakk</td>-->
+            <!--            <td>test@fujitsu.ee</td>-->
+            <!--            <td>Patients portal, Microsoft SharePoint</td>-->
+            <!--            <td>Feedback text</td>-->
         </tr>
         </tbody>
     </table>
@@ -64,11 +62,11 @@
             <label for="inputFeedback" class="visually-hidden">Text</label>
             <textarea  id="inputFeedback" class="form-control" placeholder="Text" required></textarea>
         </div>
-        <div class="mb-3" th:field="*{categories}">
+        <div class="mb-3" >
             <label for="inputCategory" class="visually-hidden">Category</label>
             <select  id="inputCategory"  class="form-select" multiple aria-label="multiple select example">
-                <option  th:each="category : ${categoriesSelector}" >
-                    <span  th:text="${category.category_name}" th:value="1"></span>
+                <option  th:each="category : ${categories}" >
+                    <span  th:text="${category.name}" th:value="1"></span>
                 </option>
             </select>
         </div>
