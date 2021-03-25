@@ -1,7 +1,5 @@
 package com.controller;
 
-import com.mappers.CategoryDto;
-import com.mappers.FeedbackDto;
 import com.model.Category;
 import com.model.Feedback;
 import com.repo.CategoryRepo;
@@ -32,8 +30,6 @@ public class GeneralController {
         categoryRepo.findParentCategories().forEach(category -> treeStructureToList(sortedCategories, category));
         model.addAttribute("categories", sortedCategories);
         model.addAttribute("newfeedback", new Feedback());
-
-
         return "index";
     }
 
@@ -43,35 +39,20 @@ public class GeneralController {
         return sortedCategories;
     }
 
-//    @RequestMapping("/" )
-//    public String indexPage(Model model, Category category) {
-//        model.addAttribute("feedbacks", feedbackRepo.findAll() );
-//        List<Category> l = categoryRepo.findAllFeedbackCategories();
-//        model.addAttribute("categories", l );
-//        return "index";
-//    }
-
 
     @PostMapping("/")
-    public String createFeedback(@ModelAttribute("newfeedback") Feedback feedback, Model model) {
+    public String createFeedback(@ModelAttribute("newfeedback") Feedback feedback, Category category, Model model) {
         List<Category> listCategoryes = new ArrayList<>();
+
+
         //model.addAttribute("method", "post");
         System.out.println(feedback);
 //        model.getAttribute("newcategory");
         model.getAttribute("newfeedback");
-//        categoryRepo.save(category);
+        categoryRepo.save(category);
         feedbackRepo.save(feedback);
         return "redirect:/";
     }
 
-//    @GetMapping("/")
-//    public String addFeedback(@RequestParam String name, @RequestParam String email, @RequestParam String text, Map<String, Object> model) {
-//        Iterable<Category> l = categoryRepo.findAll();
-//        Feedback feedback = new Feedback();
-//        feedbackRepo.save(feedback);
-//        Iterable<Feedback> messages = feedbackRepo.findAll();
-//        model.put("messages", messages);
-//        return "index";
-//    }
 
 }

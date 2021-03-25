@@ -8,8 +8,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FeedbackRepo extends CrudRepository<Feedback, Long> {
 
-
-
-
-
 }
