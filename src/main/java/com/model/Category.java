@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -20,6 +22,12 @@ public class Category {
     private String name;
     private int level;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "cat_feed"
+            , joinColumns = @JoinColumn(name = "category_id")
+            , inverseJoinColumns = @JoinColumn (name = "feedback_id"))
+    List<Feedback> feedbacks = new ArrayList<>();
 
     @ManyToOne
     private Category parent;
@@ -29,6 +37,13 @@ public class Category {
 
     public boolean hasChildren() {
         return children.isEmpty();
+    }
+
+    public void addCategoryToFeedback(Feedback feedback){
+        if(feedbacks==null){
+            feedbacks = new ArrayList<>();
+        }
+        feedbacks.add(feedback);
     }
 
 

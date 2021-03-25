@@ -3,7 +3,6 @@ package com.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @ToString
-public class Feedback  {
+public class Feedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +22,21 @@ public class Feedback  {
     private String name;
     private String email;
 
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "cat_feed"
+            , joinColumns = @JoinColumn(name = "feedback_id" )
+            , inverseJoinColumns = @JoinColumn (name = "category_id" ))
     List<Category> categories = new ArrayList<>();
 
     private String text;
+
+    public void addCategoriesToFeedback(Category category) {
+        if (categories == null) {
+            categories = new ArrayList<>();
+        }
+        categories.add(category);
+    }
 }
 
 

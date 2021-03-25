@@ -49,9 +49,11 @@ public class FeedbackApplication extends SpringBootServletInitializer {
             Category openKM = createCategory("OpenKM", 3, documentManagement, categoryRepo);
             Category microsoftSharePoint = createCategory("Microsoft SharePoint", 3, documentManagement, categoryRepo);
 
-            List<Category> categories = Arrays.asList(patientsPortal, microsoftSharePoint);
+            List<Category> categories1 = Arrays.asList(patientsPortal, microsoftSharePoint);
+            List<Category> categories2 = Arrays.asList(registration, doctorsPortal);
 
-            feedbackRepo.save(new Feedback(1L, "Otto Lakk","test@fujitsu.ee",  categories, "some text"));
+            feedbackRepo.save(new Feedback(1L, "Otto Lakk","test@fujitsu.ee",  categories1, "some text"));
+            feedbackRepo.save(new Feedback(2L, "Melania Trump","trump@gmail.ee",  categories2, "one more text"));
 
         };
     }
