@@ -16,6 +16,7 @@ public interface CategoryRepo extends CrudRepository<Category, Long>  {
     List<Category> findParentCategories();
 
 
+    List<Category> findByIdMy(Long aLong);
 }
 
 

@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -25,8 +26,8 @@ public class Feedback {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "category_feedback"
-            , joinColumns = @JoinColumn(name = "feedback_id" )
-            , inverseJoinColumns = @JoinColumn (name = "category_id" ))
+            , joinColumns = @JoinColumn(name = "feedback_id")
+            , inverseJoinColumns = @JoinColumn(name = "category_id"))
     List<Category> categories = new ArrayList<>();
 
     private String text;
@@ -37,6 +38,7 @@ public class Feedback {
         }
         categories.add(category);
     }
+
 
 
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -43,15 +44,14 @@ public class GeneralController {
     }
 
 
-//    @PostMapping("/")
-//    public String createFeedback(@ModelAttribute("newfeedback") Feedback feedback, Category category, Model model) {
-//        List<Category> listCategoryes = new ArrayList<>();
-//
-//
-//        //model.addAttribute("method", "post");
-//        System.out.println(feedback);
-////        model.getAttribute("newcategory");
-//        model.getAttribute("newfeedback");
+
+    public List<Category> findCategoryById(Category category) {
+        categoryRepo.findByIdMy(category.getId());
+        List<Category> findCategorylist = Arrays.asList();
+        findCategorylist.add((Category) categoryRepo.findByIdMy(category.getId()));
+        return findCategorylist;
+    }
+
 //        categoryRepo.save(category);
 //        feedbackRepo.save(feedback);
 //        return "redirect:/";
@@ -59,8 +59,10 @@ public class GeneralController {
 
     @PostMapping("/")
     public String createFeedback(Feedback feedback,  Category category, Model model) {
-        feedback.addCategoriesToFeedback(category);
+        findCategoryById(category);
+
         model.addAttribute("newfeedback", new Feedback());
+        model.addAttribute("newcategory", feedback.setCategories(););
 
 
 
