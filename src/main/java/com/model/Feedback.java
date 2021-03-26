@@ -24,7 +24,7 @@ public class Feedback {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "cat_feed"
+            name = "category_feedback"
             , joinColumns = @JoinColumn(name = "feedback_id" )
             , inverseJoinColumns = @JoinColumn (name = "category_id" ))
     List<Category> categories = new ArrayList<>();
@@ -37,6 +37,8 @@ public class Feedback {
         }
         categories.add(category);
     }
+
+
 }
 
 

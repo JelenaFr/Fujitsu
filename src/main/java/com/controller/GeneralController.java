@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
@@ -27,9 +26,13 @@ public class GeneralController {
 
         model.addAttribute("feedbacks", feedbackRepo.findAll());
         List<Category> sortedCategories = new ArrayList<>();
+        List<Category> getsCategories = new ArrayList<>();
         categoryRepo.findParentCategories().forEach(category -> treeStructureToList(sortedCategories, category));
         model.addAttribute("categories", sortedCategories);
         model.addAttribute("newfeedback", new Feedback());
+//        model.addAttribute("newcategory", categoryfrom);
+
+
         return "index";
     }
 
@@ -40,19 +43,56 @@ public class GeneralController {
     }
 
 
+//    @PostMapping("/")
+//    public String createFeedback(@ModelAttribute("newfeedback") Feedback feedback, Category category, Model model) {
+//        List<Category> listCategoryes = new ArrayList<>();
+//
+//
+//        //model.addAttribute("method", "post");
+//        System.out.println(feedback);
+////        model.getAttribute("newcategory");
+//        model.getAttribute("newfeedback");
+//        categoryRepo.save(category);
+//        feedbackRepo.save(feedback);
+//        return "redirect:/";
+//    }
+
     @PostMapping("/")
-    public String createFeedback(@ModelAttribute("newfeedback") Feedback feedback, Category category, Model model) {
-        List<Category> listCategoryes = new ArrayList<>();
+    public String createFeedback(Feedback feedback,  Category category, Model model) {
+        feedback.addCategoriesToFeedback(category);
+        model.addAttribute("newfeedback", new Feedback());
 
 
-        //model.addAttribute("method", "post");
+
+
         System.out.println(feedback);
-//        model.getAttribute("newcategory");
-        model.getAttribute("newfeedback");
-        categoryRepo.save(category);
         feedbackRepo.save(feedback);
         return "redirect:/";
     }
 
+//        @PostMapping("/")
+//        public String createFeedback (Feedback feedback, Category category, Model model){
+//            model.addAttribute("newfeedback", new Feedback());
+//            List<Category> listCategoryes = new ArrayList<>();
+//            model.addAttribute("listcategories", listCategoryes);
+//            feedback.setCategories(listCategoryes);
+//
+//            System.out.println(feedback);
+//            feedbackRepo.save(feedback);
+//            return "redirect:/";
+//        }
 
-}
+
+
+//@PostMapping("/")
+//    public String createFeedback( Feedback feedback, Category category, Model model) {
+//        model.addAttribute("newfeedback", new Feedback());
+//        List<Category> listCategoryes = new ArrayList<>();
+//        model.addAttribute("newcatlist", listCategoryes);
+//        System.out.println(feedback);
+//        feedbackRepo.save(feedback);
+//        return "redirect:/";
+//    }
+
+
+    }

@@ -3,13 +3,14 @@ package com.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -22,12 +23,7 @@ public class Category {
     private String name;
     private int level;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "category_feedback"
-            , joinColumns = @JoinColumn(name = "category_id")
-            , inverseJoinColumns = @JoinColumn (name = "feedback_id"))
-    List<Feedback> feedbacks = new ArrayList<>();
+
 
     @ManyToOne
     private Category parent;
@@ -39,12 +35,14 @@ public class Category {
         return children.isEmpty();
     }
 
-    public void addCategoryToFeedback(Feedback feedback){
-        if(feedbacks==null){
-            feedbacks = new ArrayList<>();
-        }
-        feedbacks.add(feedback);
-    }
+//    public void addCategoriesToFeedback(Feedback feedback){
+//        if(feedbacks==null){
+//            feedbacks = new ArrayList<>();
+//        }
+//        feedbacks.add(feedback);
+//    }
+
+
 
 
 }
