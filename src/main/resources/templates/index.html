@@ -42,7 +42,7 @@
 </div>
 
 <div class="form-feedback">
-    <form action="#" th:action="@{/}" th:object="${newfeedback}" method="post">
+    <form action="#" th:action="@{/}" th:object="${newfeedback}" method="post" >
         <h1 class="h3 mb-3 fw-normal">Please give us feedback</h1>
         <div class="mb-3">
             <label for="inputName" class="visually-hidden">Name</label>
@@ -58,16 +58,17 @@
             <label for="inputFeedback" class="visually-hidden">Text</label>
             <textarea th:field="*{text}" id="inputFeedback" class="form-control" placeholder="Text" required></textarea>
         </div>
-
-
         <div class="mb-3">
             <label for="inputCategory" class="visually-hidden">Category</label>
-            <select   id="inputCategory" class="form-select" multiple aria-label="multiple select example">
-                <option th:object="${newcategory}"
-                        th:each="category : ${categories}"
+            <select id="inputCategory" th:field="*{categories}"  class="form-select" multiple >
+                <option th:each="category : ${categoriesAll}"
                         th:disabled="${!category.hasChildren()}"
                         th:text="${'-'*(category.level-1)+category.name}"
-                        th:value="categories" th:name="categories" >
+                        th:value="${category.id}"
+
+
+
+                >
                 </option>
             </select>
         </div>

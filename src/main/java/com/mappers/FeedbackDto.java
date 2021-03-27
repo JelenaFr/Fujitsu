@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,7 +18,7 @@ public class FeedbackDto {
     private Long id;
     private String name;
     private String email;
-    List<Category> categories;
+    private List<Long> categoriesIds;
     private String text;
 
 

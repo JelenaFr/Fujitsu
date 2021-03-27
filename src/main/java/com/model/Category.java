@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -23,24 +22,18 @@ public class Category {
     private String name;
     private int level;
 
-
-
     @ManyToOne
     private Category parent;
 
     @OneToMany(mappedBy = "parent")
     private Collection<Category> children;
 
+
+
     public boolean hasChildren() {
         return children.isEmpty();
     }
 
-//    public void addCategoriesToFeedback(Feedback feedback){
-//        if(feedbacks==null){
-//            feedbacks = new ArrayList<>();
-//        }
-//        feedbacks.add(feedback);
-//    }
 
 
 
