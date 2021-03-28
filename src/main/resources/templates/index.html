@@ -35,7 +35,6 @@
                 <span th:each="category : ${feedback.categories}" th:text="${category.name  +', '}"></span>
             </td>
             <td th:text="${feedback.text}"></td>
-
         </tr>
         </tbody>
     </table>
@@ -60,24 +59,17 @@
         </div>
         <div class="mb-3">
             <label for="inputCategory" class="visually-hidden">Category</label>
-            <select  id="inputCategory" th:field="*{categories}" class="form-select" multiple>
+            <select id="inputCategory" th:field="*{categories}" class="form-select" multiple>
                 <option th:each="category : ${categoriesAll}"
                         th:disabled="${!category.hasChildren()}"
                         th:text="${'-'*(category.level-1)+category.name}"
-                        th:value="${category.id}"
-
-
-
-                >
+                        th:value="${category.id}">
                 </option>
             </select>
         </div>
-
-
         <button class="w-100 btn btn-lg btn-primary" type="submit" value="create new feedback">Send</button>
     </form>
 </div>
-
 </body>
 </html>
 

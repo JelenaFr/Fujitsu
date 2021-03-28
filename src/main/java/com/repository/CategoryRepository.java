@@ -1,4 +1,4 @@
-package com.repo;
+package com.repository;
 
 import com.model.Category;
 import org.springframework.data.jpa.repository.Query;
@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Repository
-public interface CategoryRepo extends CrudRepository<Category, Long> {
+public interface CategoryRepository extends CrudRepository<Category, Long> {
 
     String categoryOrder = "SELECT * FROM category c WHERE c.parent_id is null order by c.name asc";
     @Query(value = categoryOrder, nativeQuery = true)

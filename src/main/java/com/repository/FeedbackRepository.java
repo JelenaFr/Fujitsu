@@ -1,10 +1,10 @@
-package com.repo;
+package com.repository;
 
 import com.model.Feedback;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FeedbackRepo extends CrudRepository<Feedback, Long> {
+public interface FeedbackRepository extends CrudRepository<Feedback, Long> {
 
 }

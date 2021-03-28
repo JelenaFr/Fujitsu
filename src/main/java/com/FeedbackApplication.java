@@ -2,8 +2,8 @@ package com;
 
 import com.model.Category;
 import com.model.Feedback;
-import com.repo.CategoryRepo;
-import com.repo.FeedbackRepo;
+import com.repository.CategoryRepository;
+import com.repository.FeedbackRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,33 +27,33 @@ public class FeedbackApplication extends SpringBootServletInitializer {
         return application.sources(FeedbackApplication.class);
     }
 
-    public Category createCategory(String name, int level, Category parent, CategoryRepo categoryRepo) {
+    public Category createCategory(String name, int level, Category parent, CategoryRepository categoryRepository) {
         Category category = new Category();
         category.setName(name);
         category.setLevel(level);
         category.setParent(parent);
-        return categoryRepo.save(category);
+        return categoryRepository.save(category);
     }
 
     @Bean
-    CommandLineRunner runner(FeedbackRepo feedbackRepo, CategoryRepo categoryRepo) {
+    CommandLineRunner runner(FeedbackRepository feedbackRepository, CategoryRepository categoryRepository) {
         return args -> {
-            Category application = createCategory("Application", 1, null, categoryRepo);
-            Category health = createCategory("Health", 2, application, categoryRepo);
-            Category patientsPortal = createCategory("Patients portal", 3, health, categoryRepo);
-            Category doctorsPortal = createCategory("Doctors portal", 3, health, categoryRepo);
-            Category remoteVisitsPortal = createCategory("Remote visits portal", 3, health, categoryRepo);
-            Category registration = createCategory("Registration", 4, remoteVisitsPortal, categoryRepo);
-            Category virtualVisit = createCategory("Virtual visit", 4, remoteVisitsPortal, categoryRepo);
-            Category documentManagement = createCategory("Document management", 2, application, categoryRepo);
-            Category openKM = createCategory("OpenKM", 3, documentManagement, categoryRepo);
-            Category microsoftSharePoint = createCategory("Microsoft SharePoint", 3, documentManagement, categoryRepo);
+            Category application = createCategory("Application", 1, null, categoryRepository);
+            Category health = createCategory("Health", 2, application, categoryRepository);
+            Category patientsPortal = createCategory("Patients portal", 3, health, categoryRepository);
+            Category doctorsPortal = createCategory("Doctors portal", 3, health, categoryRepository);
+            Category remoteVisitsPortal = createCategory("Remote visits portal", 3, health, categoryRepository);
+            Category registration = createCategory("Registration", 4, remoteVisitsPortal, categoryRepository);
+            Category virtualVisit = createCategory("Virtual visit", 4, remoteVisitsPortal, categoryRepository);
+            Category documentManagement = createCategory("Document management", 2, application, categoryRepository);
+            Category openKM = createCategory("OpenKM", 3, documentManagement, categoryRepository);
+            Category microsoftSharePoint = createCategory("Microsoft SharePoint", 3, documentManagement, categoryRepository);
 
             List<Category> categories1 = Arrays.asList(patientsPortal, microsoftSharePoint);
             List<Category> categories2 = Arrays.asList(registration, doctorsPortal);
 
-            feedbackRepo.save(new Feedback(1L, "Otto Lakk","test@fujitsu.ee",  categories1, "some text"));
-            feedbackRepo.save(new Feedback(2L, "Melania Trump","trump@gmail.ee",  categories2, "one more text"));
+            feedbackRepository.save(new Feedback(1L, "Otto Lakk","test@fujitsu.ee",  categories1, "some text"));
+            feedbackRepository.save(new Feedback(2L, "Melania Trump","trump@gmail.com",  categories2, "one more text"));
 
         };
     }
