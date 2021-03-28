@@ -42,26 +42,24 @@
 
 <div class="form-feedback">
     <form action="#" th:action="@{/}" th:object="${newfeedback}" method="post">
-        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
-            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
-        </div>
         <h1 class="h3 mb-3 fw-normal">Please give us feedback</h1>
         <div class="mb-3">
             <label for="inputName" class="visually-hidden">Name</label>
-            <input type="text" th:field="${newfeedback.name}" id="inputName" class="form-control" placeholder="Name"  autofocus>
-            <span class="alert alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            <input type="text" th:field="${newfeedback.name}" id="inputName" class="form-control" placeholder="Name"
+                   autofocus>
+            <span  th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
 
 
         </div>
         <div class="mb-3">
             <label for="inputEmail" class="visually-hidden">Email address</label>
             <input type="email" th:field="*{email}" id="inputEmail" class="form-control" placeholder="Email address">
-            <span class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            <span  th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
         </div>
         <div class="mb-3">
             <label for="inputFeedback" class="visually-hidden">Text</label>
             <textarea th:field="*{text}" id="inputFeedback" class="form-control" placeholder="Text"></textarea>
-            <span class="alert alert-warning" th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
+            <span  th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
         </div>
         <div class="mb-3">
             <label for="inputCategory" class="visually-hidden">Category</label>

@@ -1,6 +1,7 @@
 package com.controller;
 
 
+import com.model.Category;
 import com.model.Feedback;
 import com.repository.CategoryRepository;
 import com.repository.FeedbackRepository;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class FeedbackController {
@@ -24,15 +27,21 @@ public class FeedbackController {
 
     @GetMapping("/")
     public String getIndexPage(Model model) {
-        feedbackService.getIndexPage(model);
+        model.addAttribute("feedbacks", feedbackService.findAllFeedBacks());
+        model.addAttribute("categoriesAll", feedbackService.loadCategories());
+        model.addAttribute("newfeedback", new Feedback());
         return "index";
     }
 
 
-    @PostMapping("/")
-    public String createFeedback(@Valid @ModelAttribute("newfeedback") Feedback newfeedback, BindingResult bindingResult, RedirectAttributes redirAttrs) {
-        feedbackService.save(newfeedback,bindingResult);
 
+
+    @PostMapping("/")
+    public String createFeedback(@Valid @ModelAttribute("newfeedback") Feedback feedback, BindingResult bindingResult, RedirectAttributes redirAttrs) {
+        if(bindingResult.hasErrors()){
+            return "index";
+        }
+        feedbackService.save(feedback);
         return "redirect:/";
     }
 }

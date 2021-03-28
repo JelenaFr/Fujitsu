@@ -26,10 +26,10 @@ public class Feedback {
     @Column
     private Long id;
 
-    @Size(min = 2, max = 25, message = "The category name must be {min} to {max} characters in length.")
+    @Size(min = 3, max = 25, message = "The name must be {min} to {max} characters in length.")
     private String name;
 
-    @Email(message = "{fooCommand.textField.email.message}")
+    @Email
     private String email;
 
     @ManyToMany(cascade = CascadeType.ALL)
