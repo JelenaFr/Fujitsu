@@ -42,7 +42,7 @@
 </div>
 
 <div class="form-feedback">
-    <form action="#" th:action="@{/}" th:object="${newfeedback}" method="post" >
+    <form action="#" th:action="@{/}" th:object="${newfeedback}" method="post">
         <h1 class="h3 mb-3 fw-normal">Please give us feedback</h1>
         <div class="mb-3">
             <label for="inputName" class="visually-hidden">Name</label>
@@ -60,7 +60,7 @@
         </div>
         <div class="mb-3">
             <label for="inputCategory" class="visually-hidden">Category</label>
-            <select id="inputCategory" th:field="*{categories}"  class="form-select" multiple >
+            <select  id="inputCategory" th:field="*{categories}" class="form-select" multiple>
                 <option th:each="category : ${categoriesAll}"
                         th:disabled="${!category.hasChildren()}"
                         th:text="${'-'*(category.level-1)+category.name}"

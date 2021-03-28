@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Data
@@ -31,14 +32,6 @@ public class Feedback {
     List<Category> categories = new ArrayList<>();
 
     private String text;
-
-    public void addCategoriesToFeedback(Category category) {
-        if (categories == null) {
-            categories = new ArrayList<>();
-        }
-        categories.add(category);
-    }
-
 
 
 }
