@@ -6,12 +6,10 @@ import com.repository.CategoryRepository;
 import com.repository.FeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-;
 
 @Service
 public class FeedbackService {
@@ -21,8 +19,6 @@ public class FeedbackService {
 
     @Autowired
     private CategoryRepository categoryRepository;
-
-
 
 
     private List<Category> treeStructureToList(List<Category> sortedCategories, Category parentCategory) {

@@ -5,20 +5,15 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Entity
 @Data
 @NoArgsConstructor
 @Table
-@Builder
 @AllArgsConstructor
-@ToString
 public class Feedback {
 
     @Id
@@ -30,6 +25,7 @@ public class Feedback {
     private String name;
 
     @Email
+    @NotBlank(message = "Email can't be blank!")
     private String email;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -37,9 +33,10 @@ public class Feedback {
             name = "category_feedback"
             , joinColumns = @JoinColumn(name = "feedback_id")
             , inverseJoinColumns = @JoinColumn(name = "category_id"))
+
     List<Category> categories = new ArrayList<>();
 
-    @NotBlank (message = "Field can't be blank!")
+    @NotBlank(message = "Text can't be blank!")
     private String text;
 
 

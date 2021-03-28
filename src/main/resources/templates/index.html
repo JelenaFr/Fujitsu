@@ -14,7 +14,6 @@
 
 </head>
 <body class="text-center">
-
 <div class="feedback-table-area">
     <table class="feedback-table" aria-label="Feedback table">
         <thead>
@@ -31,15 +30,12 @@
             <td th:text="${state.count}"></td>
             <td th:text="${feedback.name}"></td>
             <td th:text="${feedback.email}"></td>
-            <td>
-                <span th:each="category : ${feedback.categories}" th:text="${category.name  +', '}"></span>
-            </td>
+            <td><span th:each="category : ${feedback.categories}" th:text="${category.name  +', '}"></span></td>
             <td th:text="${feedback.text}"></td>
         </tr>
         </tbody>
     </table>
 </div>
-
 <div class="form-feedback">
     <form action="#" th:action="@{/}" th:object="${newfeedback}" method="post">
         <h1 class="h3 mb-3 fw-normal">Please give us feedback</h1>
@@ -47,30 +43,27 @@
             <label for="inputName" class="visually-hidden">Name</label>
             <input type="text" th:field="${newfeedback.name}" id="inputName" class="form-control" placeholder="Name"
                    autofocus>
-            <span  th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-
-
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
         </div>
         <div class="mb-3">
             <label for="inputEmail" class="visually-hidden">Email address</label>
             <input type="email" th:field="*{email}" id="inputEmail" class="form-control" placeholder="Email address">
-            <span  th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
         </div>
         <div class="mb-3">
             <label for="inputFeedback" class="visually-hidden">Text</label>
             <textarea th:field="*{text}" id="inputFeedback" class="form-control" placeholder="Text"></textarea>
-            <span  th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
+            <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
         </div>
         <div class="mb-3">
             <label for="inputCategory" class="visually-hidden">Category</label>
-            <select id="inputCategory" th:field="*{categories}" class="form-select" multiple>
+            <select id="inputCategory" th:field="*{categories}" class="form-select"  multiple>
                 <option th:each="category : ${categoriesAll}"
                         th:disabled="${!category.hasChildren()}"
                         th:text="${'-'*(category.level-1)+category.name}"
                         th:value="${category.id}">
                 </option>
             </select>
-
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit" value="create new feedback">Send</button>
     </form>
