@@ -3,9 +3,8 @@ package com.model;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class Feedback {
     @Size(min = 3, max = 25, message = "The name must be {min} to {max} characters in length.")
     private String name;
 
-    @Email
+   @Email
     @NotBlank(message = "Email can't be blank!")
     private String email;
 
@@ -34,10 +33,14 @@ public class Feedback {
             , joinColumns = @JoinColumn(name = "feedback_id")
             , inverseJoinColumns = @JoinColumn(name = "category_id"))
 
+
     List<Category> categories = new ArrayList<>();
 
     @NotBlank(message = "Text can't be blank!")
     private String text;
+
+
+
 
 
 }
