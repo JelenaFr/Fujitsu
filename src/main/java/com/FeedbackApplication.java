@@ -27,9 +27,9 @@ public class FeedbackApplication extends SpringBootServletInitializer {
         return application.sources(FeedbackApplication.class);
     }
 
-    public Category createCategory(String name, int level, Category parent, CategoryRepository categoryRepository) {
+    public Category createCategory(String description, int level, Category parent, CategoryRepository categoryRepository) {
         Category category = new Category();
-        category.setName(name);
+        category.setDescription(description);
         category.setLevel(level);
         category.setParent(parent);
         return categoryRepository.save(category);
@@ -48,7 +48,7 @@ public class FeedbackApplication extends SpringBootServletInitializer {
             Category documentManagement = createCategory("Document management", 2, application, categoryRepository);
             Category openKM = createCategory("OpenKM", 3, documentManagement, categoryRepository);
             Category microsoftSharePoint = createCategory("Microsoft SharePoint", 3, documentManagement, categoryRepository);
-//
+
             List<Category> categories1 = Arrays.asList(patientsPortal, microsoftSharePoint);
             List<Category> categories2 = Arrays.asList(registration, doctorsPortal);
 

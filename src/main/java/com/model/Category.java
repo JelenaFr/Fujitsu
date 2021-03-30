@@ -1,22 +1,21 @@
 package com.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String description;
     private int level;
 
     @ManyToOne
@@ -28,5 +27,6 @@ public class Category {
     public boolean hasChildren() {
         return children.isEmpty();
     }
+
 
 }

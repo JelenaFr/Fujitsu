@@ -5,14 +5,12 @@ import com.model.Feedback;
 import com.model.validator.FeedbackValidator;
 import com.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 
@@ -28,12 +26,12 @@ public class FeedbackController {
     public String getFeedbackPage(Model model) {
         model.addAttribute("feedbacks", feedbackService.findAllFeedBacks());
         model.addAttribute("categoriesAll", feedbackService.loadCategories());
-        model.addAttribute("newfeedback", new Feedback());
+        model.addAttribute("newFeedback", new Feedback());
         return "index";
     }
 
-    @PostMapping(path = "/")
-    public String createFeedback(@Valid @ModelAttribute("newfeedback") Feedback feedback, BindingResult errors, Model model) {
+    @PostMapping("/")
+    public String createFeedback(@Valid @ModelAttribute("newFeedback") Feedback feedback, BindingResult errors, Model model) {
         feedbackValidator.validate(feedback, errors);
         if (errors.hasErrors()) {
             model.addAttribute("feedbacks", feedbackService.findAllFeedBacks());

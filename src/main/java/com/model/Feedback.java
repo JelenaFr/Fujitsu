@@ -1,15 +1,21 @@
 package com.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Table
 @AllArgsConstructor
@@ -21,10 +27,10 @@ public class Feedback {
     private Long id;
 
     @Size(min = 3, max = 25, message = "The name must be {min} to {max} characters in length.")
-    private String name;
+    private String userName;
 
-   @Email
-    @NotBlank(message = "Email can't be blank!")
+    @Email
+    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "Email address is invalid")
     private String email;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -36,11 +42,8 @@ public class Feedback {
 
     List<Category> categories = new ArrayList<>();
 
-    @NotBlank(message = "Text can't be blank!")
-    private String text;
-
-
-
+    @NotBlank(message = "Text can not be blank!")
+    private String feedbackText;
 
 
 }

@@ -2,6 +2,7 @@ package com.service;
 
 import com.model.Category;
 import com.model.Feedback;
+
 import com.repository.CategoryRepository;
 import com.repository.FeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ public class FeedbackService {
 
     @Autowired
     private FeedbackRepository feedbackRepository;
-
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -26,14 +26,10 @@ public class FeedbackService {
         parentCategory.getChildren().forEach(category -> treeStructureToList(sortedCategories, category));
         return sortedCategories;
     }
-
-
     public void save(Feedback feedback) {
         feedbackRepository.save(feedback);
 
     }
-
-
     public Iterable<Feedback> findAllFeedBacks() {
         return feedbackRepository.findAll();
     }
