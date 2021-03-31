@@ -2,7 +2,7 @@ package com.controller;
 
 
 import com.model.Feedback;
-import com.model.validator.FeedbackValidator;
+import com.util.FeedbackValidator;
 import com.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
