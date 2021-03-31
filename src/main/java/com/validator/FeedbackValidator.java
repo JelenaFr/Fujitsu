@@ -1,4 +1,4 @@
-package com.util;
+package com.validator;
 
 import com.model.Feedback;
 import org.springframework.stereotype.Component;

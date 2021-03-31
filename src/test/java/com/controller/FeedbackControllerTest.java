@@ -5,11 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -18,18 +17,25 @@ public class FeedbackControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private FeedbackController feedbackController;
+
     @Test
     public void contextLoads() throws Exception {
         this.mockMvc.perform(get("/"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Feedback form")))
-                .andExpect(content().string(containsString("Please give us feedback")));
+                .andExpect(status().isOk());
     }
+
     @Test
-    public void feedbackPageTest () throws Exception {}
+    public void createFeedback() throws Exception {
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post("/")
+                .param("userName", "Melania")
+                .param("email", "melania@exmaple.com")
+                .param("feedbackText", "some text")
+                .param("categories", String.valueOf(4))  ;
+        this.mockMvc.perform(builder)
+                .andExpect(status().isFound());
+    }
+
+
 }
 
 

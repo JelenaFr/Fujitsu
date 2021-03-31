@@ -4,56 +4,50 @@ import com.model.Category;
 import com.model.Feedback;
 import com.repository.CategoryRepository;
 import com.repository.FeedbackRepository;
-import org.junit.experimental.categories.Categories;
+import lombok.val;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static com.prototype.FeedbackPrototype.aFeedback;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class FeedbackServiceTest {
-    @MockBean
-    private CategoryRepository categoryRepository;
-    @InjectMocks
-    private FeedbackRepository feedbackRepository;
+
     @InjectMocks
     private FeedbackService feedbackService;
-
+    @Mock
+    private CategoryRepository categoryRepository;
+    @Mock
+    private FeedbackRepository feedbackRepository;
 
     @Test
     void save() {
-        String userName = "Melania";
-        String email = "melania@gmail.com";
-        String text = "some text";
-
-        List<Category> categories =null;
         Feedback feedback = new Feedback();
-
-        feedback.setUserName(userName);
-        feedback.setFeedbackText(text);
-        feedback.setEmail(email);
-        feedback.setCategories(categories);
-
-        Mockito.when(feedbackRepository.save(feedback)).thenReturn(null);
-
+        feedbackService.save(feedback);
+        Mockito.verify(feedbackRepository).save(feedback);
     }
-
-
 //    @Test
 //    void findAllFeedBacks() {
-//        feedbackService.findAllFeedBacks()
-//
-//        when(feedbackService.findAllFeedBacks()).thenReturn(Collections.singletonList(aFeedback()));
-//
+//        feedbackService.findAllFeedBacks();
+//        Mockito.verify(feedbackRepository).findAll();
 //    }
-//
-//    @Test
-//    void loadCategories() {
-//    }
+    @Test
+    void loadCategories() {
+        List<Category> categories = Arrays.asList(Category.builder()
+                .children(Arrays.asList(new Category()))
+                .build());
+        Mockito.when(categoryRepository.findParentCategories()).thenReturn(categories);
+        val result = feedbackService.loadCategories();
+        Mockito.verify(categoryRepository).findParentCategories();
+
+       Assertions.assertThat(result).hasSize(2);
+
+    }
 }

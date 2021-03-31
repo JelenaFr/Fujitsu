@@ -1,18 +1,13 @@
 package com.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
 @Entity
 @Getter
 @Setter
@@ -38,8 +33,7 @@ public class Feedback {
             name = "category_feedback"
             , joinColumns = @JoinColumn(name = "feedback_id")
             , inverseJoinColumns = @JoinColumn(name = "category_id"))
-
-
+    //@NotEmpty
     List<Category> categories = new ArrayList<>();
 
     @NotBlank(message = "Text can not be blank!")

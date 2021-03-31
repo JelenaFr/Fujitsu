@@ -3,8 +3,9 @@ package com.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
-
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -22,7 +23,7 @@ public class Category {
     private Category parent;
 
     @OneToMany(mappedBy = "parent")
-    private Collection<Category> children;
+    private Collection<Category> children = new ArrayList<>();
 
     public boolean hasChildren() {
         return children.isEmpty();
