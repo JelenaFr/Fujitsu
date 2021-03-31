@@ -32,13 +32,13 @@ public class FeedbackService {
         feedbackRepository.save(feedback);
 
     }
-    public Iterable<Feedback> findAllFeedBacks() {
-        return feedbackRepository.findAll();
-    }
+//    public Iterable<Feedback> findAllFeedBacks() {
+//        return feedbackRepository.findAll();
+//    }
 
-    public Page<Feedback> findAllFeedBacksPages(int page, int size) {
-        return feedbackRepository.findAll(PageRequest.of(page, size));
-    }
+//    public Page<Feedback> findAllFeedBacksPages(int page, int size) {
+//        return feedbackRepository.findAll(PageRequest.of(page, 5));
+//    }
 
     public List<Category> loadCategories() {
         List<Category> sortedCategories = new ArrayList<>();
