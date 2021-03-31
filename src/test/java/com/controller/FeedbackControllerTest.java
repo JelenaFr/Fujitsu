@@ -35,6 +35,17 @@ public class FeedbackControllerTest {
                 .andExpect(status().isFound());
     }
 
+    @Test
+    public void createFeedback_notPassValidation() throws Exception {
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post("/")
+                .param("userName", "")
+                .param("email", "melania@exmaple.com")
+                .param("feedbackText", "some text")
+                .param("categories", String.valueOf(4))  ;
+        this.mockMvc.perform(builder)
+                .andExpect(status().isOk());
+    }
+
 
 }
 

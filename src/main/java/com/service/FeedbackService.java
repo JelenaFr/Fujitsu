@@ -2,12 +2,9 @@ package com.service;
 
 import com.model.Category;
 import com.model.Feedback;
-
 import com.repository.CategoryRepository;
 import com.repository.FeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,13 +29,9 @@ public class FeedbackService {
         feedbackRepository.save(feedback);
 
     }
-//    public Iterable<Feedback> findAllFeedBacks() {
-//        return feedbackRepository.findAll();
-//    }
-
-//    public Page<Feedback> findAllFeedBacksPages(int page, int size) {
-//        return feedbackRepository.findAll(PageRequest.of(page, 5));
-//    }
+    public Iterable<Feedback> findAllFeedBacks() {
+        return feedbackRepository.findAll();
+    }
 
     public List<Category> loadCategories() {
         List<Category> sortedCategories = new ArrayList<>();

@@ -33,11 +33,13 @@ class FeedbackServiceTest {
         feedbackService.save(feedback);
         Mockito.verify(feedbackRepository).save(feedback);
     }
-//    @Test
-//    void findAllFeedBacks() {
-//        feedbackService.findAllFeedBacks();
-//        Mockito.verify(feedbackRepository).findAll();
-//    }
+
+    @Test
+    void findAllFeedBacks() {
+        feedbackService.findAllFeedBacks();
+        Mockito.verify(feedbackRepository).findAll();
+    }
+
     @Test
     void loadCategories() {
         List<Category> categories = Arrays.asList(Category.builder()
@@ -47,7 +49,7 @@ class FeedbackServiceTest {
         val result = feedbackService.loadCategories();
         Mockito.verify(categoryRepository).findParentCategories();
 
-       Assertions.assertThat(result).hasSize(2);
+        Assertions.assertThat(result).hasSize(2);
 
     }
 }

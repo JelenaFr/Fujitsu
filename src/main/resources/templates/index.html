@@ -26,22 +26,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="feedback, state : ${feedbacksPages}">
+        <tr th:each="feedback, state : ${feedbacks}">
             <td th:text="${state.count}"></td>
-            <td th:text="*{userName}"></td>
-            <td th:text="*{email}"></td>
-            <td><span th:each="category : *{categories}" th:text="${category.description +', '}"></span></td>
-            <td th:text="*{feedbackText}"></td>
+            <td th:text="${feedback.userName}"></td>
+            <td th:text="${feedback.email.toLowerCase()}"></td>
+            <td><span th:each="category : ${feedback.categories}" th:text="${category.description +', '}"></span></td>
+            <td th:text="${feedback.feedbackText}"></td>
         </tr>
         </tbody>
     </table>
-<!--    <ul class="pagination" th:if="${feedbacksPages. > 0}">-->
-<!--        <li th:each="pageNumber : ${numbers}"-->
-<!--            th:class="${pageNumber == feedbacksPages} ? active">-->
-<!--            <a th:href="@{'/?page=' + ${pageNumber}}"-->
-<!--               th:text="${pageNumber+1}"></a>-->
-<!--        </li>-->
-<!--    </ul>-->
 
 </div>
 <div class="form-feedback">

@@ -11,6 +11,7 @@ import java.util.List;
 public interface CategoryRepository extends CrudRepository<Category, Long> {
 
     String categoryOrder = "SELECT * FROM category c WHERE c.parent_id is null order by c.description asc";
+
     @Query(value = categoryOrder, nativeQuery = true)
     List<Category> findParentCategories();
 }

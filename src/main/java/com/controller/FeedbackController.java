@@ -2,25 +2,17 @@ package com.controller;
 
 
 import com.model.Feedback;
-import com.repository.FeedbackRepository;
-import com.validator.FeedbackValidator;
 import com.service.FeedbackService;
+import com.validator.FeedbackValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.stream.IntStream;
 
 @Controller
 public class FeedbackController {
@@ -29,31 +21,20 @@ public class FeedbackController {
     FeedbackService feedbackService;
     @Autowired
     FeedbackValidator feedbackValidator;
-    @Autowired
-    FeedbackRepository feedbackRepository;
 
     @GetMapping("/")
-    public String getFeedbackPage(Model model, @RequestParam (value = "page", required = false, defaultValue = "0") Integer page
-    ) {
-        Page<Feedback> pages = feedbackRepository.findAll(PageRequest.of(page, 5));
-        //model.addAttribute("feedbacks", feedbackService.findAllFeedBacks());
-        model.addAttribute("feedbacksPages", pages.getContent());
-        model.addAttribute("numbers", IntStream.range(0, pages.getTotalPages()).toArray());
+    public String getFeedbackPage(Model model) {
+        model.addAttribute("feedbacks", feedbackService.findAllFeedBacks());
         model.addAttribute("categoriesAll", feedbackService.loadCategories());
         model.addAttribute("newFeedback", new Feedback());
         return "index";
     }
 
     @PostMapping("/")
-    public String createFeedback(@Valid @ModelAttribute("newFeedback") Feedback feedback, BindingResult errors, Model model,
-                                 @RequestParam (value = "page", required = false, defaultValue = "0") Integer page) {
+    public String createFeedback(@Valid @ModelAttribute("newFeedback") Feedback feedback, BindingResult errors, Model model) {
         feedbackValidator.validate(feedback, errors);
-
         if (errors.hasErrors()) {
-            Page<Feedback> pages = feedbackRepository.findAll(PageRequest.of(page, 5));
-            //model.addAttribute("feedbacks", feedbackService.findAllFeedBacks());
-            model.addAttribute("feedbacksPages", pages.getContent());
-            model.addAttribute("numbers", IntStream.range(0, pages.getTotalPages()).toArray());
+            model.addAttribute("feedbacks", feedbackService.findAllFeedBacks());
             model.addAttribute("categoriesAll", feedbackService.loadCategories());
             return "index";
         }
