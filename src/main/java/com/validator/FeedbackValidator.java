@@ -17,11 +17,7 @@ public class FeedbackValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Feedback feedback = (Feedback) o;
         if (feedback.getCategories().size() < 1) {
-            errors.rejectValue("categories", "Required");
+            errors.rejectValue("categories", "");
         }
-
-
     }
-
-
 }

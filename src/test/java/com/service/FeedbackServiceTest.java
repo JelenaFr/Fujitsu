@@ -32,12 +32,14 @@ class FeedbackServiceTest {
         Feedback feedback = new Feedback();
         feedbackService.save(feedback);
         Mockito.verify(feedbackRepository).save(feedback);
+
     }
 
     @Test
     void findAllFeedBacks() {
         feedbackService.findAllFeedBacks();
         Mockito.verify(feedbackRepository).findAll();
+
     }
 
     @Test
@@ -50,6 +52,7 @@ class FeedbackServiceTest {
         Mockito.verify(categoryRepository).findParentCategories();
 
         Assertions.assertThat(result).hasSize(2);
+
 
     }
 }

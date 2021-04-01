@@ -36,13 +36,11 @@ public class Feedback {
             name = "category_feedback"
             , joinColumns = @JoinColumn(name = "feedback_id")
             , inverseJoinColumns = @JoinColumn(name = "category_id"))
-    //@NotEmpty
+
     List<Category> categories = new ArrayList<>();
 
     @NotBlank(message = "Text can not be blank!")
     private String feedbackText;
-
-
 }
 
 
